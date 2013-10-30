@@ -3,12 +3,14 @@ Spree::Variant.class_eval do
   accepts_nested_attributes_for :volume_prices, :allow_destroy => true
 
   attr_accessible :volume_prices_attributes
+  
+  before_filter @current_user = Thread.current[:current_user]
 
   # calculates the price based on quantity
-  def volume_price(quantity)
+   def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    else
+    elsif @current_user?
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
@@ -20,7 +22,7 @@ Spree::Variant.class_eval do
             return self.price * (1 - volume_price.amount)
           end
         end
-      end
+    else
       # No price ranges matched.
       return self.price
     end
