@@ -3,11 +3,10 @@ Spree::Variant.class_eval do
   accepts_nested_attributes_for :volume_prices, :allow_destroy => true
 
   attr_accessible :volume_prices_attributes
-  validates_presence_of :current_user
 
   # calculates the price based on quantity
   def volume_price(quantity)
-    if current_user?
+    if User.current
       return self.price
     else
       self.volume_prices.each do |volume_price|
