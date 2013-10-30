@@ -4,7 +4,7 @@ Spree::Variant.class_eval do
 
   attr_accessible :volume_prices_attributes
   
-  cattr_accessor :user  # it's accessible outside Comment
+  before_filter :authenticate_member!
   
 
   # calculates the price based on quantity
@@ -12,7 +12,7 @@ Spree::Variant.class_eval do
   def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    else if self.user?
+    else if current_user?
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
