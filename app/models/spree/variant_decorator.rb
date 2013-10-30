@@ -3,8 +3,6 @@ Spree::Variant.class_eval do
   accepts_nested_attributes_for :volume_prices, :allow_destroy => true
 
   attr_accessible :volume_prices_attributes
-  
-  before_filter Thread.current[:current_user] = @current_user 
 
   # calculates the price based on quantity
      # calculates the price based on quantity
