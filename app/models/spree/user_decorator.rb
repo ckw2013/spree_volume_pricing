@@ -1,10 +1,14 @@
-class User < ActiveRecord::Base
-
-  def self.current
-    Thread.current[:user]
+module Spree
+  class User < ActiveRecord::Base
+    
+     def self.current
+        Thread.current[:user]
+     end
+     
+     def self.current=(user)
+        Thread.current[:user] = user
+     end
+    
   end
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
-  
 end
+  
