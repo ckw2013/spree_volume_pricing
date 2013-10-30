@@ -24,6 +24,7 @@ Spree::Variant.class_eval do
             return self.price * (1 - volume_price.amount)
           end
         end
+    end    
   end
       # No price ranges matched.
       return self.price
