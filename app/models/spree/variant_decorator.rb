@@ -4,10 +4,6 @@ Spree::Variant.class_eval do
 
   attr_accessible :volume_prices_attributes
 
-  before_filter :require_user # require_user will set the current_user in controllers
-  before_filter :set_current_user
-  
-
   # calculates the price based on quantity
      # calculates the price based on quantity
   def volume_price(quantity)
