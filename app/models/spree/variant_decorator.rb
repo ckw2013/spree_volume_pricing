@@ -20,7 +20,8 @@ Spree::Variant.class_eval do
           when 'percent'
             return self.price * (1 - volume_price.amount)
           end
-        end   
+        end
+  end
   end
 end
   
