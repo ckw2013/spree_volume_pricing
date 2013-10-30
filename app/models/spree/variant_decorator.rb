@@ -9,7 +9,7 @@ Spree::Variant.class_eval do
    def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    elsif current_user?
+    else 
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
@@ -21,7 +21,7 @@ Spree::Variant.class_eval do
             return self.price * (1 - volume_price.amount)
           end
         end
-    else 
+        
       # No price ranges matched.
       return self.price
     end
