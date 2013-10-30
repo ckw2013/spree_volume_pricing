@@ -3,8 +3,9 @@ Spree::Variant.class_eval do
   accepts_nested_attributes_for :volume_prices, :allow_destroy => true
 
   attr_accessible :volume_prices_attributes
-  
-  before_filter :authenticate_user!
+
+  before_filter :require_user # require_user will set the current_user in controllers
+  before_filter :set_current_user
   
 
   # calculates the price based on quantity
@@ -12,7 +13,7 @@ Spree::Variant.class_eval do
   def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    else if current_user?
+    else if User.current?
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
