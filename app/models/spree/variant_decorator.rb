@@ -24,6 +24,7 @@ Spree::Variant.class_eval do
           end
         end
       end
+  end
       # No price ranges matched.
       return self.price
     end
