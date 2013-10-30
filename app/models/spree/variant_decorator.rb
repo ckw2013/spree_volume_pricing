@@ -4,7 +4,7 @@ Spree::Variant.class_eval do
 
   attr_accessible :volume_prices_attributes
   
-  before_filter Thread.current[:current_user] = @current_user
+  before_filter @current_user = Thread.current[:current_user]
 
   # calculates the price based on quantity
   def volume_price(quantity)
