@@ -6,6 +6,9 @@ Spree::LineItem.class_eval do
   # chosen for the product. This is mainly for compatibility with spree_sale_products
   # 
   # Assumption here is that the volume price currency is the same as the product currency
+  
+  before_filter Thread.current[:current_user] = @current_user
+  
   old_copy_price = instance_method(:copy_price)
   define_method(:copy_price) do
     old_copy_price.bind(self).call
@@ -14,7 +17,7 @@ Spree::LineItem.class_eval do
       if changed? && changes.keys.include?('quantity')
         vprice = self.variant.volume_price(self.quantity)
 
-        if self.price.present? && vprice <= self.variant.price
+        if self.price.present? && vprice <= self.variant.price && @current_user == true
           self.price = vprice and return
         end
       end
