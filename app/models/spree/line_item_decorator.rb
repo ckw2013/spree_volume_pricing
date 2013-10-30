@@ -7,8 +7,6 @@ Spree::LineItem.class_eval do
   #
   # Assumption here is that the volume price currency is the same as the product currency
   
-  before_filter Thread.current[:current_user] = @current_user 
-  
   old_copy_price = instance_method(:copy_price)
   define_method(:copy_price) do
     old_copy_price.bind(self).call
