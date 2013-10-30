@@ -7,10 +7,11 @@ Spree::Variant.class_eval do
   before_filter Thread.current[:current_user] = @current_user 
 
   # calculates the price based on quantity
-   def volume_price(quantity)
+     # calculates the price based on quantity
+  def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    elsif @current_user?
+    else if @current_user?
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
@@ -22,7 +23,7 @@ Spree::Variant.class_eval do
             return self.price * (1 - volume_price.amount)
           end
         end
-    else
+      end
       # No price ranges matched.
       return self.price
     end
