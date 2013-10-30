@@ -4,7 +4,7 @@ Spree::Variant.class_eval do
 
   attr_accessible :volume_prices_attributes
   
-  before_filter :authenticate_member!
+  before_filter :authenticate_user!
   
 
   # calculates the price based on quantity
