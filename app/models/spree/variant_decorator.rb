@@ -10,7 +10,7 @@ Spree::Variant.class_eval do
   def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    else if current_user == null
+    else if current_user == false
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
