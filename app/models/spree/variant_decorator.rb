@@ -4,12 +4,14 @@ Spree::Variant.class_eval do
 
   attr_accessible :volume_prices_attributes
 
+  before_filter @current_user = Thread.current[:current_user]
+
   # calculates the price based on quantity
      # calculates the price based on quantity
   def volume_price(quantity)
     if self.volume_prices.count == 0
       return self.price
-    else if current_user?
+    else if @current_user?
       self.volume_prices.each do |volume_price|
         if volume_price.include?(quantity)
           case volume_price.discount_type
