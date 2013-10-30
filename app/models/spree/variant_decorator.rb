@@ -3,7 +3,7 @@ Spree::Variant.class_eval do
   accepts_nested_attributes_for :volume_prices, :allow_destroy => true
 
   attr_accessible :volume_prices_attributes
-  attr_accessor :current_user
+  validate_presence_of :current_user
 
   # calculates the price based on quantity
      # calculates the price based on quantity
