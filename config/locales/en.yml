@@ -6,3 +6,6 @@ en:
   range: Range
   volume_prices: Volume Prices
   volume_pricing: Volume Pricing
+  name: Name
+  amount: Amount
+  remove: Remove
